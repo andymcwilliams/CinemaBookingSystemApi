@@ -1,5 +1,12 @@
 # CinemaBookingSystemApi
 
+https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0&tabs=visual-studio-code
+
+```
+dotnet aspnet-codegenerator controller -name MoviesController -async -api -m Movie -dc CinemaBookingSystemContext -outDir Controllers
+```
+
+
 ![challenge](img/challenge.jpg)
 
 # Build and Run
