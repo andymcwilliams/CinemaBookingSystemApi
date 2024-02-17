@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CinemaBookingSystemApi;
 using CinemaBookingSystemApi.Models;
+using CinemaBookingSystemApi.Requests;
 
 namespace CinemaBookingSystemApi.Controllers
 {
@@ -76,8 +77,9 @@ namespace CinemaBookingSystemApi.Controllers
         // POST: api/Movies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
+        public async Task<ActionResult<Movie>> PostMovie(CreateMovieRequest movieReq)
         {
+            var movie = movieReq.ToModel();
             _context.Movies.Add(movie);
             await _context.SaveChangesAsync();
 
