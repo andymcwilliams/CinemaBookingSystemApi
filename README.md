@@ -9,7 +9,24 @@ dotnet aspnet-codegenerator controller -name MoviesController -async -api -m Mov
 
 ![challenge](img/challenge.jpg)
 
-# Build and Run
+# Setup, Build and Run
+
+## SQL Migrations
+
+To apply migrations, update appsettings.json with SQL connection string. Then run the following
+
+```
+dotnet tool install --global dotnet-ef
+
+dotnet ef database update 
+```
+
+To create new migration:
+```
+dotnet ef migrations add <NAME>
+```
+
+## Run
 
 ```dotnet run --launch-profile https```
 
