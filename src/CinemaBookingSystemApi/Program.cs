@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using CinemaBookingSystemApi;
+using CinemaBookingSystemApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,18 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddLogging(logging =>
+{
+    logging.AddConsole();
+});
+
 var configBuilder = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json");
-
-if (builder.Environment.IsDevelopment())
-{
-    configBuilder.AddJsonFile("appsettings.Development.json");
-}
 
 var config = configBuilder.Build();
 
 var useInMemoryDB = config.GetValue<bool>("useInMemoryDB");
-var connectionString = config.GetConnectionString("CinemaBookingSystemConnection");
+var connectionString = Environment.GetEnvironmentVariable("CinemaBookingSystemConnection");
 
 if(useInMemoryDB){
     builder.Services.AddDbContext<CinemaBookingSystemContext>(opt =>
@@ -34,12 +35,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+app.ConfigureExceptionHandler(logger);
 
 app.UseHttpsRedirection();
 
