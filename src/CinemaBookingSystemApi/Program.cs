@@ -21,10 +21,13 @@ var config = configBuilder.Build();
 var useInMemoryDB = config.GetValue<bool>("useInMemoryDB");
 var connectionString = Environment.GetEnvironmentVariable("CinemaBookingSystemConnection");
 
-if(useInMemoryDB){
+if (useInMemoryDB)
+{
     builder.Services.AddDbContext<CinemaBookingSystemContext>(opt =>
     opt.UseInMemoryDatabase("CinemaBookingSystem"));
-} else {
+}
+else
+{
     builder.Services.AddDbContext<CinemaBookingSystemContext>(opt =>
     opt.UseSqlServer(connectionString));
 }
