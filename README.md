@@ -60,10 +60,20 @@ docker build -t cinema-booking-system-api .
 
 Run container, passing in CinemaBookingSystemConnection env from local machine
 ```
-docker run -d -e CinemaBookingSystemConnection="${CinemaBookingSystemConnection}" -p 7170:8080 --name api-container cinema-booking-system-api
+docker run -d -e CinemaBookingSystemConnection="${CinemaBookingSystemConnection}" -p 5001:5000 --name api-container cinema-booking-system-api
 ```
 
-Access Swagger on http://localhost:7170/swagger/index.html
+Or on Windows
+```
+docker run -d -e "CinemaBookingSystemConnection=$env:CinemaBookingSystemConnection" -p 5001:5000 --name api-container cinema-booking-system-api
+```
+
+Build and run using single command (on Windows)
+```
+docker build -t cinema-booking-system-api . && docker run -d -e "CinemaBookingSystemConnection=$env:CinemaBookingSystemConnection" -p 5001:5000 --name api-container cinema-booking-system-api
+```
+
+Access Swagger on http://localhost:5001/swagger
 
 ## Scaffold Controllers
 ```

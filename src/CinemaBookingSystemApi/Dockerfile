@@ -5,11 +5,11 @@ FROM mcr.microsoft.com/dotnet/sdk AS build-env
 WORKDIR /app
 
 # Copy the .csproj file and restore dependencies
-COPY ./CinemaBookingSystemApi/*.csproj ./
+COPY ./*.csproj ./
 RUN dotnet restore
 
 # Copy the remaining source code and build the application
-COPY ./CinemaBookingSystemApi ./
+COPY ./ ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
