@@ -19,4 +19,5 @@ COPY --from=build-env /app/out .
 
 ENTRYPOINT ["dotnet", "CinemaBookingSystemApi.dll"]
 
-EXPOSE 8080
+ENV ASPNETCORE_URLS http://+:5000
+EXPOSE 5000
