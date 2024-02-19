@@ -13,14 +13,9 @@ namespace CinemaBookingSystemApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MoviesController : ControllerBase
+    public class MoviesController(CinemaBookingSystemContext context) : ControllerBase
     {
-        private readonly CinemaBookingSystemContext _context;
-
-        public MoviesController(CinemaBookingSystemContext context)
-        {
-            _context = context;
-        }
+        private readonly CinemaBookingSystemContext _context = context;
 
         // GET: api/Movies
         [HttpGet]
